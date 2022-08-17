@@ -5,8 +5,6 @@ import (
 	"time"
 )
 
-var s = "seven"
-
 type User struct {
 	FirstName string
 	LastName string
@@ -16,15 +14,10 @@ type User struct {
 }
 
 func main() {
-	var s2 = 6
+	user := User {
+		FirstName: "Trevor",
+		LastName: "Philips",
+	}
 
-	log.Println("s is", s)
-	log.Println("s2 is", s2)
-
-	saySomething("xxx")
-}
-
-func saySomething(s3 string) (string, string) {
-	log.Println("s from the extra func:", s)
-	return s3, "world"
+	log.Println(user.FirstName, user.LastName, user.BirthDate)
 }

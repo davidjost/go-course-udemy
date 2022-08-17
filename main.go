@@ -1,46 +1,30 @@
 package main
 
 import (
-	"fmt"
 	"log"
+	"time"
 )
 
+var s = "seven"
+
+type User struct {
+	FirstName string
+	LastName string
+	PhoneNumber string
+	Age int
+	BirthDate time.Time
+}
+
 func main() {
-	// fmt stands for format
-	fmt.Println("Hello World!")
+	var s2 = 6
 
-	var whatToSay string 
-	var i int
+	log.Println("s is", s)
+	log.Println("s2 is", s2)
 
-	whatToSay = "Goodbye cruel world"
-	fmt.Println(whatToSay)
-
-	i = 7
-	fmt.Println("i is set to ", i)
-
-	// fmt.Println(saySomething())
-	// := var shorthand. Infers type from function type.
-	whatWasSaid, thatOtherThing := saySomething()
-
-	fmt.Println("The function returns:",whatWasSaid, thatOtherThing)
-
-	// lesson 9: pointers
-	// myString is set to Green and logged.
-	myString := "Green"
-	log.Println("myString is set to", myString)
-	// change() is called with the position in memory where myString sits. The variable isn't getting a new value, what is at the position where the variable looks is being changed.
-	// to reference a pointer, use &. To point to a location in memory, use *.
-	changeUsingPointer(&myString)
-	log.Println("after change through pointer", myString)
+	saySomething("xxx")
 }
 
-func saySomething() (string, string) {
-	return "something", "else"
-}
-
-// lesson 9: pointers
-func changeUsingPointer(s *string)  {
-	log.Println("S is set to ", s)
-	newValue := "Red"
-	*s = newValue
+func saySomething(s3 string) (string, string) {
+	log.Println("s from the extra func:", s)
+	return s3, "world"
 }

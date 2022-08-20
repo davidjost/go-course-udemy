@@ -2,15 +2,23 @@ package main
 
 import "log"
 
+type User struct {
+	FirstName string
+	LastName string
+}
+
 func main() {
 	// maps have to be set up with the shorthand syntax since a simple declaration without assignment results in a nil map. Nil maps cannot take any assignments.
 
 	// map name := make(type[key type]value type)
-	myMap := make(map[string]string)
+	myMap := make(map[string]User)
 
-	myMap["dog"] = "Samson"
+	me := User {
+		FirstName: "Trevor",
+		LastName: "Philips",
+	}
 
-	myMap["cat"] = "Clarance"
+	myMap["me"] = me
 
 	log.Println(myMap)
 }

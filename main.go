@@ -1,58 +1,56 @@
 package main
 
-import (
-	"log"
-)
+import "fmt"
+
+type Animal interface {
+	Says() string
+	NumberOfLegs() int
+}
+
+type Dog struct {
+	Name  string
+	Breed string
+}
+
+type Gorilla struct {
+	Name          string
+	Color         string
+	NumberofTeeth int
+}
 
 func main() {
-	// iterating over a slice of strings
-	animals := []string{"horse", "cat", "dog", "fish", "cow"}
-
-	// _ is a blank identifier, gets rid of the index variable
-	for _, animal := range animals {
-		log.Println(animal)
+	dog := Dog{
+		Name:  "Samson",
+		Breed: "Collie",
 	}
 
-	log.Println("-------------------")
-
-	// maps are like objects with key/value pairs
-	seaCreatures := make(map[string]string)
-
-	seaCreatures["star"] = "patrick"
-	seaCreatures["sponge"] = "bob"
-
-	for animalType, name := range seaCreatures {
-		log.Println(animalType, name)
-	}
-
-	log.Println("-------------------")
+	PrintInfo(&dog)
 	
-	// iterating over a string
-	firstLine := "One upon a midnight dreary"
-	
-	// in Go, a string is a slice of bytes.
-	for index, letter := range firstLine {
-		log.Println(index, ":", letter)
+	gorilla := Gorilla{
+		Name: "Bobo",
+		Color: "Gray",
+		NumberofTeeth: 24,
 	}
 
-	log.Println("-------------------")
+	PrintInfo(&gorilla)
+}
 
-	// iterating over custom types
-	type User struct {
-		FirstName string
-		LastName string
-		Age int
-	}
+func PrintInfo(a Animal) {
+	fmt.Println("This animal says", a.Says(), "and has", a.NumberOfLegs(), "legs")
+}
 
-	// create variable as slice of type User
-	var users []User
-	// append into the slice the struct User and give it these values
-	users = append(users, User{"John", "Milton", 45})
-	users = append(users, User{"Will", "Wheaton", 22})
-	users = append(users, User{"Mary", "Lamb", 24})
-	users = append(users, User{"Mike", "Star", 66})
+func (d *Dog) Says() string {
+	return "Woof"	
+}
 
-	for index, user := range users{
-		log.Println(index, ":", user.FirstName, user.LastName, ",", user.Age)
-	}
+func (d *Dog) NumberOfLegs() int {
+	return 4	
+}
+
+func (d *Gorilla) Says() string {
+	return "Ugh"	
+}
+
+func (d *Gorilla) NumberOfLegs() int {
+	return 2	
 }

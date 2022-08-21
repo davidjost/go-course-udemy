@@ -1,37 +1,29 @@
 package main
 
 import (
-	"fmt"
-	"sort"
+	"log"
 )
 
 func main() {
-	// slices are like arrays
-	var mySlice []int
-	
-	mySlice = append(mySlice, 2)
-	mySlice = append(mySlice, 1)
-	mySlice = append(mySlice, 3)
+	myNum := 100
+	buul := false
 
-	// sorting slices
-	sort.Ints(mySlice)
+	// logical operators
+	if myNum > 99 && !buul {
+		log.Println("myNum is above 99 and buul is", buul)
+	}
 
-	// log.Println(mySlice)
+	// switch
 
-	// shorthand slices
-	numbers := []int{1,2,3,4,5,6,7,8,9,10}
+	myVar := "fish"
 
-	// slices like arrays start at 0, to limit the output use [:]
-	// log.Println(numbers[4:10])
+	switch myVar {
+	case "dog":
+		log.Println("It's a dog.")
+	case "cat":
+		log.Println("meow")
+	default:
+		log.Println("default")
+	}
 
-	// names := []string{"william", "jones", "pete"}
-
-	// log.Println(names[1:2])
-
-	// var numbers = make([]int,3,5)
-  printSlice(numbers)
-}
-
-func printSlice(x []int){
-	fmt.Printf("len=%d cap=%d slice=%v\n",len(x),cap(x),x)
 }

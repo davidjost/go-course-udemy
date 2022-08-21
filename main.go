@@ -1,35 +1,77 @@
 package main
 
 import (
+	"encoding/json"
+	"fmt"
 	"log"
-
-	"github.com/davidjost/go-lesson-package/helpers"
 )
 
-const numPool = 1000
-
-
-// func function_name( [parameter list] ) [return_types]
-// the parameter this receives is bleh, of type channel, that channel only takes int as types.
-func CalcValue(bleh chan int) {
-	// write random number to randNum
-	randNum := helpers.GenRandNum(numPool)
-	// push randNum to the channel that comes from the parameter of the function
-	bleh <- randNum
+// struct to manage json in go
+type Person struct {
+	FirstName string `json:"first_name"`
+	LastName  string `json:"last_name"`
+	HairColor string `json:"hair_color"`
+	HasDog    bool   `json:"has_dog"`
 }
 
 func main() {
-	// channels lesson
+	// data source json from somewhere
+	myJson := `
+	[
+		{
+			"first_name" : "Clark",
+			"last_name" : "Kent",
+			"hair_color": "black",
+			"has_dog": true
+		},
+		{
+			"first_name" : "Bruce",
+			"last_name" : "Wayne",
+			"hair_color": "blonde",
+			"has_dog": false
+		}
+	]`
 
-	// open channel
-	intChan := make(chan int)
-	// closing a channel after use is required best practice
-	defer close(intChan)
+	// create variable that is a slice of type Person, that will receive the json data
+	var unmarshalled []Person
 
-	// create extra go routine for concurrent execution
-	go CalcValue(intChan)
+	// covert the json string with Unmarshal and write it to the place where the unmarshalled variable looks. JSON comes as a slice of bytes, thats why we need the []byte function.
+	err := json.Unmarshal([]byte(myJson), &unmarshalled)
 
-	// num gets assigned whatever is coming out of the channel
-	num := <-intChan
-	log.Println("num is", num)
+	if err != nil {
+		log.Println("Error unmarshalling the JSON", err)
+	}
+
+	log.Printf("unmarshalled: %v", unmarshalled)
+
+	// write JSON from a struct
+	// create var mySlice slice of type Person
+	var mySlice []Person
+
+	// create data for the slice
+	var m1 Person
+	m1.FirstName = "Wally"
+	m1.LastName = "West"
+	m1.HairColor = "red"
+	m1.HasDog = false
+
+	// write data to slice
+	mySlice = append(mySlice, m1)
+
+	// create data for the slice
+	var m2 Person
+	m2.FirstName = "John"
+	m2.LastName = "Wayne"
+	m2.HairColor = "brown"
+	m2.HasDog = false
+
+	// write data to slice
+	mySlice = append(mySlice, m2)
+
+	newJson, err := json.MarshalIndent(mySlice, "", "  ")
+	if err != nil {
+		log.Println("Error marshalling the JSON", err)
+	}
+
+	fmt.Println(string(newJson))
 }

@@ -1,77 +1,30 @@
 package main
 
 import (
-	"encoding/json"
-	"fmt"
+	"errors"
 	"log"
 )
 
-// struct to manage json in go
-type Person struct {
-	FirstName string `json:"first_name"`
-	LastName  string `json:"last_name"`
-	HairColor string `json:"hair_color"`
-	HasDog    bool   `json:"has_dog"`
+func main() {
+	result, err := divide(100.0, 0)
+
+	if err != nil {
+		log.Println(err)
+		return
+	}
+
+	log.Println("result of division is", result)
 }
 
-func main() {
-	// data source json from somewhere
-	myJson := `
-	[
-		{
-			"first_name" : "Clark",
-			"last_name" : "Kent",
-			"hair_color": "black",
-			"has_dog": true
-		},
-		{
-			"first_name" : "Bruce",
-			"last_name" : "Wayne",
-			"hair_color": "blonde",
-			"has_dog": false
-		}
-	]`
+func divide(x, y float32) (float32, error) {
+	var result float32
 
-	// create variable that is a slice of type Person, that will receive the json data
-	var unmarshalled []Person
-
-	// covert the json string with Unmarshal and write it to the place where the unmarshalled variable looks. JSON comes as a slice of bytes, thats why we need the []byte function.
-	err := json.Unmarshal([]byte(myJson), &unmarshalled)
-
-	if err != nil {
-		log.Println("Error unmarshalling the JSON", err)
+	if y == 0 {
+		return result, errors.New("cannot divide by 0")
 	}
 
-	log.Printf("unmarshalled: %v", unmarshalled)
+	result = x / y
 
-	// write JSON from a struct
-	// create var mySlice slice of type Person
-	var mySlice []Person
-
-	// create data for the slice
-	var m1 Person
-	m1.FirstName = "Wally"
-	m1.LastName = "West"
-	m1.HairColor = "red"
-	m1.HasDog = false
-
-	// write data to slice
-	mySlice = append(mySlice, m1)
-
-	// create data for the slice
-	var m2 Person
-	m2.FirstName = "John"
-	m2.LastName = "Wayne"
-	m2.HairColor = "brown"
-	m2.HasDog = false
-
-	// write data to slice
-	mySlice = append(mySlice, m2)
-
-	newJson, err := json.MarshalIndent(mySlice, "", "  ")
-	if err != nil {
-		log.Println("Error marshalling the JSON", err)
-	}
-
-	fmt.Println(string(newJson))
+	// return the result and nil for the error
+	return result, nil
 }

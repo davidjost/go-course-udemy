@@ -3,6 +3,7 @@ package render
 import (
 	"bytes"
 	"go-course-udemy/pkg/config"
+	"go-course-udemy/pkg/models"
 	"html/template"
 	"log"
 	"net/http"
@@ -17,7 +18,13 @@ func NewTemplates(a *config.AppConfig)  {
 	app = a
 }
 
-func RenderTemplate(write http.ResponseWriter, tmpl string) {
+func AddDefaultData(td *models.TempateData) *models.TempateData {
+	
+
+	return td
+}
+
+func RenderTemplate(write http.ResponseWriter, tmpl string, td *models.TempateData) {
 
 	var tc map[string]*template.Template
 
@@ -36,7 +43,9 @@ func RenderTemplate(write http.ResponseWriter, tmpl string) {
 
 	buf := new(bytes.Buffer)
 
-	err := t.Execute(buf, nil)
+	td = AddDefaultData(td)
+
+	err := t.Execute(buf, td)
 	if err != nil {
 		log.Println(err)
 	}

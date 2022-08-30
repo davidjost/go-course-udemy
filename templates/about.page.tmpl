@@ -4,5 +4,11 @@
 <h1>This is the about page</h1>
 <p>this is some text</p>
 <p>this is some LESS text</p>
+{{/* index is the method used to look data up that has an index */}}
+{{/* the . refers to all the data that is passed to the template via StringMap */}}
+{{/* "test" is the key for the value we like to get here */}}
+<p>This came from the template: {{index .StringMap "test"}}</p>
+<br />
+<a href="/home">home</a>
 
 {{ end }}

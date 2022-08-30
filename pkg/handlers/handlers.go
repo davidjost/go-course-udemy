@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"go-course-udemy/pkg/config"
+	"go-course-udemy/pkg/models"
 	"go-course-udemy/pkg/render"
 	"net/http"
 )
@@ -28,10 +29,17 @@ func NewHandlers(r *Repository) {
 
 // Home is the home page handler
 func (m *Repository) Home(write http.ResponseWriter, request *http.Request){
-	render.RenderTemplate(write, "home.page.tmpl")
+	render.RenderTemplate(write, "home.page.tmpl", &models.TempateData{})	
 }
 
 // About is the about page handler
 func (m *Repository) About(write http.ResponseWriter, request *http.Request){
-	render.RenderTemplate(write, "about.page.tmpl")
+	// perform some logic
+	stringMap := make(map[string]string)
+	stringMap["test"] = "Hello again"
+
+	// send the data to the template
+	render.RenderTemplate(write, "about.page.tmpl", &models.TempateData{
+		StringMap: stringMap,
+	})
 }

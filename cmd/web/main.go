@@ -28,11 +28,14 @@ func main() {
 	// calling this will give this program access to the app
 	render.NewTemplates(&app)
 
-	// basic routing, for / call function Home
-	http.HandleFunc("/", handlers.Repo.Home)
-	http.HandleFunc("/about", handlers.Repo.About)
 
 	fmt.Println(fmt.Sprintf("Starting application server on port %s", portNumber))
-	
-	_ = http.ListenAndServe(portNumber, nil)
+
+	srv := &http.Server {
+		Addr: portNumber,
+		Handler: routes(&app),
+	}
+
+	err = srv.ListenAndServe()
+	log.Fatal(err)
 }

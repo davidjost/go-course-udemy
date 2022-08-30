@@ -2,28 +2,41 @@ package render
 
 import (
 	"bytes"
+	"go-course-udemy/pkg/config"
 	"html/template"
 	"log"
 	"net/http"
 	"path/filepath"
 )
 
+
+var app *config.AppConfig
+
+// NewTemplates sets the config for the template package
+func NewTemplates(a *config.AppConfig)  {
+	app = a
+}
+
 func RenderTemplate(write http.ResponseWriter, tmpl string) {
-	// get the template cache from the app config
-	tc, err := CreateTemplateCache()
-	if err != nil {
-		log.Fatal(err)
+
+	var tc map[string]*template.Template
+
+	if app.UseCache {
+		// get the template cache from the app config
+		tc = app.TemplateCache
+	} else {
+		tc, _ = CreateTemplateCache()
 	}
 
 	// get the requested template from cache. 2 variable declarations for the return values of createTemplateCache(), which is a map: key and value pair.
 	t, ok := tc[tmpl]
 	if !ok {
-		log.Fatal(err)
+		log.Fatal("could not get template from cache")
 	}
 
 	buf := new(bytes.Buffer)
 
-	err = t.Execute(buf, nil)
+	err := t.Execute(buf, nil)
 	if err != nil {
 		log.Println(err)
 	}

@@ -38,6 +38,7 @@ func (m *Repository) About(write http.ResponseWriter, request *http.Request){
 	stringMap := make(map[string]string)
 	stringMap["test"] = "Hello again"
 
+
 	// send the data to the template
 	render.RenderTemplate(write, "about.page.tmpl", &models.TempateData{
 		StringMap: stringMap,

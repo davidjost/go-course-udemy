@@ -17,6 +17,7 @@ type Repository struct {
 
 // NewRepo creates a new repository
 func NewRepo(a *config.AppConfig) *Repository {
+	// the & character is read as "address of", in this case it returns the address of Repository
 	return &Repository{
 		App: a,
 	}
@@ -29,6 +30,9 @@ func NewHandlers(r *Repository) {
 
 // Home is the home page handler
 func (m *Repository) Home(write http.ResponseWriter, request *http.Request){
+	remoteIP := request.RemoteAddr
+	m.App.Session.Put(request.Context(), "remote_ip", remoteIP)
+
 	render.RenderTemplate(write, "home.page.tmpl", &models.TempateData{})	
 }
 
@@ -37,6 +41,10 @@ func (m *Repository) About(write http.ResponseWriter, request *http.Request){
 	// perform some logic
 	stringMap := make(map[string]string)
 	stringMap["test"] = "Hello again"
+
+	remoteIP := m.App.Session.GetString(request.Context(), "remote_ip")
+
+	stringMap["remote_ip"] = remoteIP
 
 
 	// send the data to the template

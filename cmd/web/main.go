@@ -2,12 +2,13 @@ package main
 
 import (
 	"fmt"
-	"go-course-udemy/pkg/config"
-	"go-course-udemy/pkg/handlers"
-	"go-course-udemy/pkg/render"
 	"log"
 	"net/http"
 	"time"
+
+	"github.com/davidjost/go-course-project-bookings/pkg/config"
+	"github.com/davidjost/go-course-project-bookings/pkg/handlers"
+	"github.com/davidjost/go-course-project-bookings/pkg/render"
 
 	"github.com/alexedwards/scs/v2"
 )

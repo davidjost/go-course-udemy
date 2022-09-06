@@ -1,10 +1,11 @@
 package handlers
 
 import (
-	"go-course-udemy/pkg/config"
-	"go-course-udemy/pkg/models"
-	"go-course-udemy/pkg/render"
 	"net/http"
+
+	"github.com/davidjost/go-course-project-bookings/pkg/config"
+	"github.com/davidjost/go-course-project-bookings/pkg/models"
+	"github.com/davidjost/go-course-project-bookings/pkg/render"
 )
 
 // Repo the repository used by the handlers

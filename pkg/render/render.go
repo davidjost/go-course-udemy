@@ -2,12 +2,13 @@ package render
 
 import (
 	"bytes"
-	"go-course-udemy/pkg/config"
-	"go-course-udemy/pkg/models"
 	"html/template"
 	"log"
 	"net/http"
 	"path/filepath"
+
+	"github.com/davidjost/go-course-project-bookings/pkg/config"
+	"github.com/davidjost/go-course-project-bookings/pkg/models"
 )
 
 

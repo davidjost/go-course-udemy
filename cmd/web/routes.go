@@ -1,9 +1,10 @@
 package main
 
 import (
-	"go-course-udemy/pkg/config"
-	"go-course-udemy/pkg/handlers"
 	"net/http"
+
+	"github.com/davidjost/go-course-project-bookings/pkg/config"
+	"github.com/davidjost/go-course-project-bookings/pkg/handlers"
 
 	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/chi/v5"

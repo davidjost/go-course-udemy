@@ -1,0 +1,31 @@
+:root {
+  --multiplicator: 1.2;
+  --size-1: 1rem;
+  --size-2: calc(var(--size-1) * var(--multiplicator));
+  --size-3: calc(var(--size-2) * var(--multiplicator));
+  --size-4: calc(var(--size-3) * var(--multiplicator));
+}
+
+body {
+  font-family: "Segoe UI";
+  margin: 0;
+  padding: 0;
+}
+
+.topnav {
+  display: flex;
+  flex-direction: row;
+  background-color: slategray;
+}
+
+.topnav .link {
+  color: white;
+  text-decoration: none;
+  padding: var(--size-2);
+  cursor: pointer;
+}
+
+select > .link {
+  cursor: pointer;
+  background-color: slategray;
+}

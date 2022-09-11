@@ -17,6 +17,14 @@
     </nav>
     <section class="main">
       <h1>Make a reservation</h1>
+      <h4>Search for availability</h4>
+      <form class="reservation-form" action="/reservation.html" method="get">
+        <label for="starting-date">Check-In</label>
+        <input id="starting-date" name="start_date" type="date" />
+        <label for="ending-date">Checkout</label>
+        <input id="ending-date" name="end_date" type="date" />
+        <button type="submit">Check availability</button>
+      </form>
     </section>
   </body>
 </html>

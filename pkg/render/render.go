@@ -14,14 +14,12 @@ import (
 
 var app *config.AppConfig
 
-// NewTemplates sets the config for the template package
+// NewTemplates func sets the config for the template package
 func NewTemplates(a *config.AppConfig)  {
 	app = a
 }
 
 func AddDefaultData(td *models.TempateData) *models.TempateData {
-	
-
 	return td
 }
 
@@ -63,10 +61,12 @@ func CreateTemplateCache() (map[string]*template.Template, error) {
 	// myCache is a map of strings of type *template.Template and also is empty due to the {}
 	myCache := map[string]*template.Template{}
 
-	// get all files named *.page.tmpl from ./templates/
-	pages, err := filepath.Glob("./templates/*.page.tmpl")
+	// get all files named *.page.html from ./templates/
+	pages, err := filepath.Glob("./templates/*.page.html")
+	// log.Println(pages)
 
 	if err != nil {
+		// log.Println("Error 1")
 		return myCache, err
 	}
 
@@ -74,21 +74,27 @@ func CreateTemplateCache() (map[string]*template.Template, error) {
 	for _, page := range pages {
 		// .Base strips off the path and leaves the filename
 		fileName := filepath.Base(page)
+		// log.Println("fileName is:", fileName)
+		// log.Println("page is:", page)
 		templateSet, err := template.New(fileName).ParseFiles(page)
+		// log.Println("templateSet is:", templateSet)
 
 		if err != nil {
+			// log.Println("Error 2")
 			return myCache, err
 		}
 
-		matches, err := filepath.Glob("./templates/*.layout.tmpl")
+		matches, err := filepath.Glob("./templates/*.layout.html")
 		
 		if err != nil {
+			// log.Println("Error 3")
 			return myCache, err
 		}
 
 		if len(matches) > 0 {
-			templateSet, err = templateSet.ParseGlob("./templates/*.layout.tmpl")
+			templateSet, err = templateSet.ParseGlob("./templates/*.layout.html")
 			if err != nil {
+				// log.Println("Error 4")
 				return myCache, err
 			}
 		}

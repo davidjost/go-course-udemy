@@ -1,0 +1,10 @@
+{{template "base" .}} {{define "content"}}
+<h1>Generals Quarters</h1>
+<a href="/make-reservation">Make Reservation now</a>
+<br />
+<br />
+{{block "availability" .}}This shows when availability wasn't found {{end}}
+
+<br />
+<br />
+{{end}}

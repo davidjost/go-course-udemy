@@ -1,0 +1,22 @@
+{{define "availability"}}
+
+<button onclick="modal.showModal()">Check availability</button>
+
+<dialog id="modal">
+  <form method="dialog">
+    <article>
+      <header><h1>Search for availability</h1></header>
+      <section>
+        <label for="starting-date">Check-In</label>
+        <input id="starting-date" name="start_date" type="date" />
+        <label for="ending-date">Checkout</label>
+        <input id="ending-date" name="end_date" type="date" />
+        <button type="submit">Check availability</button>
+      </section>
+    </article>
+  </form>
+</dialog>
+
+<!-- <form class="reservation-form" action="/reservation.html" method="get">
+</form> -->
+{{end}}
